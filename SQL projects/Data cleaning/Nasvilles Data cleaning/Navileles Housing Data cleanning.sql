@@ -1,6 +1,5 @@
 --This attempt to clean data for more usable purpose 
 --Data source:	https://www.kaggle.com/tmthyjames/nashville-housing-data
---Reference: @Alex the Analyst
 
 USE [Porfolio project]
 GO
@@ -9,7 +8,7 @@ SELECT * FROM
 dbo.NashvilesHousing
 
 --Standardize SaleDate (Date Format)
-SELECT SaleDate , CONVERT(date,SaleDate)
+SELECT SaleDate , CONVERT(date,SaleDate) New_date
 FROM dbo.NashvilesHousing
 
 ALTER TABLE NashvilesHousing
