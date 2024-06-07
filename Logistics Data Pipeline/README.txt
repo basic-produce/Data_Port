@@ -1,1 +1,1 @@
-Visit the blog at: 
+Visit the blog at: https://thong-pm.github.io/dynamic_inv/
