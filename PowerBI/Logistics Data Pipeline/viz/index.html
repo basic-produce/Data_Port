@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Dynamic Inventory Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <header id="header">
+        <nav id="toc">
+            <ul>
+                <h3><a href="#title">Table of Content</a></h3>
+                <li><a href="#heading1">Introduction</a></li>
+                <li><a href="#heading2">Pipeline</a></li>
+                <ul>
+                    <li><a href="#subheading1">Motivation</li>
+                    <li><a href="#subheading2">Data Relation Table</li>
+                </ul>
+                <li><a href="#heading3">Dashboard</a></li>
+                <ul>
+                    <li><a href="#subheading3">Dashboard</li>
+                    <li><a href="#subheading4">Benefits</li>
+                    <li><a href="#subheading5">Breakdown</li>
+                </ul>
+                <li><a href="#heading4">Improvements</a></li>
+                <li><a href="#heading5">Conclusion</a></li>
+        </nav>
+    </header>
+    <div id="main">
+        <h1 id ="title"><strong>Power BI Dynamic Inventory Dashboard</strong></h1>
+        <h2 id="heading1"><strong>Introduction</strong></h2>
+        <p> - This is a suggested project aim to deliver a dynamics inventory level dashboard.</p>
+        <p> - The main scope is to centralize the information of POs, SOs, availabily, schedule shiping from SAP HANA, multiple Excel sheets into a single dashboard for tracking stock level by timeline.</p>
+        <p> - A prototype dashboard was entually set up.</p>
+        <i> Disclaimer:<br>
+            <ul>
+            <li> The data was a censored version of the business data.</li>
+            <li> The dashboard is a prototype for presentation purpose.</li>
+            </ul> 
+        </i>
+        <br><!-- ___ -->
+        <h2 id="heading2"><strong>Pipeline</strong></h2>
+        <iframe src="workflow.html" width="1000" height="650" frameborder="0"></iframe>
+        <br>
+        <h3 id="subheading1"><strong>Motivation Behind The Pipeline</strong></h3>
+        <h4><strong>From Sources to Data Warehouse </strong></h4>
+        <p> The direct access or API to SAP HANA was restricted for users like me as a Demand Planner. The solution was the delivery of normalized datasets automated by a dedicated BI team using the combination of their tools and Power Automate sending via Outlook mail aligned with the schedules.
+        </p>
+        <p> Satisfied the need for ETL from SAP HANA.</p> 
+        <p> But then the data needs to be centralized with some other Excel sheets on Sharepoint.</p>
+        <p>For this prototype run, I use SQL Server as my local data storing solution, acting as a data warehouse. Then run the script to normalize and bulk upload. <br>
+            <a href="https://github.com/thong-pm/Data_Port/blob/5ba0c67b2e0c6e276d83cd382417d5516e7d151f/Logistics%20Data%20Pipeline/script_bulk_upload.ipynb" target="_blank" >Link to my script</a>.</p>
+        <h4><strong>From Data Warehouse to Power BI</strong></h4>
+        <p> “Data should be transformed as far upstream as possible and as far downstream as necessary.”
+            Shout out to Matthew Roche.</p>
+        <p>I cross join the date_key, materials, and plant as the “skeleton” for the dataset. Result in the  Dim_ Cartesian. Stored in SQL Server and eventually loaded into Power BI.</p>
+        <p>It has its pros:</p>
+        <p>- Simplified Queries for Power BI Model.</p>
+        <p>- Reduced Complexity in DAX.</p>
+        <p>But with that being said, this does not follow any common principles like Kimball’s.
+        This is not a traditional snowflake schema.</p>
+        <p>But so far so good it’s running on Power BI Service resources. Around 5 million rows for 2 years span with 3500 material codes and 2 plants.</p>
+        <p>Making sense for a prototype.</p>
+        <br>
+        <h3 id="subheading2"><strong>Data Table Relation</strong></h3>
+        <iframe src="table_rel.html" width="1000" height="500" frameborder="0"></iframe>
+        <br><!-- ___ -->
+        <br><!-- ___ -->
+        <h2 id="heading3"><strong>Dynamic Inventory Tracking (Interactive)</strong></h2>
+        <h3 id="subheading3"><strong>Dashboard</strong></h3>
+        <iframe title="Dynamics Inventory Dashboard" width="1050" height="750" src="https://app.powerbi.com/view?r=eyJrIjoiZDFmOGY3ZjAtYjhkOC00YzIwLTk2ZTYtYWRkMDI2M2I1MGJhIiwidCI6Ijk0YzBmYWUxLWY5MDEtNDMwZi05ZTkyLWJiMGZkNzMxZTlmNCIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+        <br>
+        <h3 id="subheading4"><strong>Main Benefits</strong></h3>
+        <p>- User-friendly centralized display of data from multiple sources.</p>
+        <p>- Transparency ⇒ cut off cross-checking time between Supply Chain team and other stakeholders.</p>
+        <p>- Enhance situation awareness for the planner and relevant stakeholders.</p>
+        <br>
+        <h3 id="subheading5"><strong>Breakdown</strong></h3>
+        <iframe src="elaborate.html" width="1100" height="800" frameborder="0"></iframe>
+        <h2 id="heading4"><strong>Improvements and Expansion</strong></h2>
+        <h3 id="subheading6"><strong>The Pipelines</strong></h3>
+        <p>For Task 2 and 4, incorporate orchestra tools to reduce manual run script.</p>
+        <h3 id="subheading7"><strong>The Dashboard</strong></h3>
+        <p>Backorders date highlights and communication visualization. Aim to raise the problem in the time window that’s can make the impact for the Planner to expedite or for the Sales team to re-negotiate.</p>
+        <p>Calculate re-order point for each material for each plant.</p>
+        <h2 id="heading5"><strong>Conclusion</strong></h2>
+        <p>For it’s to actually works in business setting, the dashboard need to be more robust.</p>
+        <p>Regarding this blog, the main focus will be the technology and while has been working as a demand planner I know it’s satisfied some of my need. But there’s a lot of room for improvement for sure.</p>
+    </div>     
+</body>
+</html>
